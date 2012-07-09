@@ -22,7 +22,7 @@ Function renameFiles
 			$newdir = $topLevelDirs[$j].name + "_" + $dir.name + "_"
 
 			# Search for the files - REMOVED FILTER
-			$files = Get-ChildItem -Path $dir.fullname -Recurse
+			$files = Get-ChildItem -Path $dir.fullname -Filter *.jpg -Recurse
 				
 			Foreach ($file In $files)
 				{
