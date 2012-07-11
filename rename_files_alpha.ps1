@@ -13,16 +13,16 @@ Function renameFiles
 		# Loop through all directories
 		$dirs = dir $subDir -Recurse | Where { $_.psIsContainer -eq $true }
 
-		Foreach ($dir In $dirs)
+		Foreach ($directory In $dirs)
 			{
 			# Set default value for addition to file name
 			$i = 1
 	
 			#added '$topLevelDirs[$j].name + "_" + ' to append grandparent folder name
-			$newdir = $topLevelDirs[$j].name + "_" + $dir.name + "_"
-
+			$strNewDir = $topLevelDirs[$j].name + "_" + $directory.name + "_"
+			
 			# Search for the files - REMOVED FILTER
-			$files = Get-ChildItem -Path $dir.fullname -Filter *.jpg -Recurse
+			$files = Get-ChildItem -Path $directory.fullname -Filter *.jpg -Recurse
 				
 			Foreach ($file In $files)
 				{
@@ -35,7 +35,7 @@ Function renameFiles
 			
 						# Split the name and rename it to the parent folder
 						$split    = $file.name.split(".jpg")
-						$replace  = $split[0] -Replace $split[0],($newdir + $i + ".jpg")
+						$replace  = $split[0] -Replace $split[0],($strNewDir + $i + ".jpg")
 
 						# Trim spaces and rename the file
 						$image_string = $file.fullname.ToString().Trim()
