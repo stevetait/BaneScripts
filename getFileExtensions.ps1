@@ -1,0 +1,1 @@
+Get-ChildItem -Recurse | where {!$_.PsIsContainer} | Select-Object Extension | Get-Unique > extensions.txt
