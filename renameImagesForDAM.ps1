@@ -1,11 +1,19 @@
-
-$topLevelDirs = Split-Path -parent $MyInvocation.MyCommand.Definition
+#######################################################################################
+# AUTHOR  : Steve Baney
+# 
+# ORIGINAL - Marius - http://www.hican.nl – 
+# (http://gallery.technet.microsoft.com/scriptcenter/PowerShell-Rename-Files-b1268678)
+#
+# COMMENT : This script renames all .jpg .jpeg .bmp .gif .png 
+# files to "top level folder - parent folder - original filename"
+#
+#######################################################################################
 
 Function renameFiles
 	{
 	
-	# topLevelDirs corresponds to Show directories
-	$topLevelDirs = dir $topLevelPath | Where { $_.psIsContainer -eq $true }
+	# Gets all directories below the current directory
+	$topLevelDirs = dir | Where { $_.psIsContainer -eq $true }
 	
 	Foreach ($subDir In $topLevelDirs)
 		{
