@@ -61,8 +61,8 @@ Function renameFiles
 	}
 
 # Run script
-renameFiles “*.jpg”
-renameFiles “*.jpeg”
-renameFiles “*.gif”
-renameFiles “*.bmp”
-renameFiles “*.png”
+renameFiles "*.jpg"
+renameFiles "*.jpeg"
+renameFiles "*.gif"
+renameFiles "*.bmp"
+renameFiles "*.png"
