@@ -8,6 +8,6 @@ This means you will either have to navigate to the desired directory from the co
 
 The script currently handles .jpg .jpeg .gif .bmp .png, but can handle any extension by adding
 
-renameFiles “*.xyz”
+renameFiles "*.xyz"
 
 to the end of the file, where xyz is the desired extension.
