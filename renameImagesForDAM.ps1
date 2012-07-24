@@ -46,11 +46,14 @@ Function renameFiles
 					
 					$newFileName -replace " ","_"
 					
-					# Trim spaces and rename the file
-					$image_string = $file.fullname.ToString().Trim()
+					# Trim spaces of file path
+					$imagePath = $file.fullname.ToString().Trim()
+					
+					# Add XMP Subject tag
+					exiftool "-xmp-dc:Subject=$showNamePrefix" -overwrite_original $file.FullName
 					
 					# Rename $file to $newFileName
-					Rename-Item "$image_string" "$newFileName"
+					Rename-Item "$imagePath" "$newFileName"
 					
 					}
 				
