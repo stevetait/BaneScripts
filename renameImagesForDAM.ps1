@@ -12,19 +12,23 @@
 Function renameFiles
 	{
 	
+	# Sets $filter to the file extension passed to the renameFiles function
 	Param($filter)
 	
 	# Gets all directories below the current directory
 	$topLevelDirs = dir | Where { $_.psIsContainer -eq $true }
 	
+	# Loop through second-level directories
 	Foreach ($subDir In $topLevelDirs)
 		{
 		
 		# Set prefix to Show name - top level directory name
 		$showNamePrefix = $subDir
 		
+		# Get all files that match $filter
 		$files = Get-ChildItem -Path $subDir.FullName -Filter $filter -Recurse
 		
+		# Loop through files
 		Foreach ($file In $files)
 				{
 				
@@ -32,8 +36,11 @@ Function renameFiles
 				If ($file)
 					{
 					
+					# Gets immediate parent of $file
 					$parentDirectory = Split-Path -leaf $file.DirectoryName
 					
+					
+					# If the top level directory and immediate parent are the same, don't duplicate the prefix
 					if($showNamePrefix.Name.CompareTo($parentDirectory))
 						{
 						$newFileName = "$showNamePrefix-$parentDirectory-$file"
@@ -43,7 +50,7 @@ Function renameFiles
 						$newFileName = "$showNamePrefix-$file"
 						}
 					
-					
+					# Replace spaces with underscores
 					$newFileName -replace " ","_"
 					
 					# Trim spaces of file path
@@ -63,7 +70,7 @@ Function renameFiles
 	
 	}
 
-# Run script
+# Run script, passing the extension filter as a parameter
 renameFiles "*.jpg"
 renameFiles "*.jpeg"
 renameFiles "*.gif"
