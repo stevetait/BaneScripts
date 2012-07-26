@@ -23,6 +23,11 @@ Function moveShowfileImages
 		# Debug - output full path of $subDir		
 		#"$subdirPath"
 		
+		#$subDirName = $subdir.Name
+		
+		# Debug - output name of $subDir		
+		"$subDirName"
+		
 		# Append path to \IMAGES\JPEG subfolder to path
 		$jpegFolderPath = Join-Path $subDir.FullName "\IMAGES\JPEG"
 		
@@ -35,9 +40,9 @@ Function moveShowfileImages
 			$outputPath = Join-Path "X:\PhotosForImport\SHOWFILE" $subDir.Name
 			
 			# Debug - output $outputPath
-			"$outputPath"
+			#"$outputPath"
 			
-			get-childitem "$jpegFolderPath" -include @("*.jpg","*.jpeg","*.bmp","*.gif","*.png") -recurse | copy-item -destination {new-item -path $outputPath -type directory -ea SilentlyContinue | out-null; write-output $outputPath}
+			get-childitem "$jpegFolderPath" -include @("*.jpg","*.jpeg","*.bmp","*.gif","*.png") -recurse | copy-item -destination {$newpath=$_.PSParentPath -replace [regex]::escape($jpegFolderPath), "$outputPath"; new-item -path $newpath -type directory -ea SilentlyContinue | out-null; write-output $newpath}
 			
 			}
 			
