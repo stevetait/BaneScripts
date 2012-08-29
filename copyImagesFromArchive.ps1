@@ -50,22 +50,22 @@ Function moveShowfileImages
 				#"$imagesJpegFolderPath"
 				
 				# Create Output Path
-				$outputPath = Join-Path "X:\PhotosForImport\ARCHIVE" $currentGrandChildDir.Name
+				$outputPath = Join-Path "X:\PhotosForImport\ARCHIVE" $grandChildDir.Name
 				
 				# Debug - output $outputPath
-				#"$outputPath"
+				"$outputPath"
 				
 				get-childitem "$imagesJpegFolderPath" -include @("*.jpg","*.jpeg","*.bmp","*.gif","*.png") -recurse | copy-item -destination {$newpath=$_.PSParentPath -replace [regex]::escape($imagesJpegFolderPath), "$outputPath"; new-item -path $newpath -type directory -ea SilentlyContinue | out-null; write-output $newpath}
 				}
 			elseif(Test-Path $jpegsFolderPath)
 				{
-				"$jpegsFolderPath"
+				#"$jpegsFolderPath"
 				
 				# Create Output Path
-				$outputPath = Join-Path "X:\PhotosForImport\ARCHIVE" $currentGrandChildDir.Name
+				$outputPath = Join-Path "X:\PhotosForImport\ARCHIVE" $grandChildDir.Name
 				
 				# Debug - output $outputPath
-				#"$outputPath"
+				"$outputPath"
 				
 				get-childitem "$jpegsFolderPath" -include @("*.jpg","*.jpeg","*.bmp","*.gif","*.png") -recurse | copy-item -destination {$newpath=$_.PSParentPath -replace [regex]::escape($jpegsFolderPath), "$outputPath"; new-item -path $newpath -type directory -ea SilentlyContinue | out-null; write-output $newpath}
 				}
