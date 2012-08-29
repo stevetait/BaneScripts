@@ -10,7 +10,7 @@ Function moveShowfileImages
 	#Param($filter)
 	
 	#Set working directory to showfile
-	Set-Location "D:\DAMworking"
+	Set-Location "\\FS01\ARCHIVE"
 	
 	$parentDir = [Environment]::CurrentDirectory=(Get-Location -PSProvider FileSystem).ProviderPath
 	#"Parent Directory: $parentDir"
@@ -50,7 +50,9 @@ Function moveShowfileImages
 				#"$imagesJpegFolderPath"
 				
 				# Create Output Path
-				$outputPath = Join-Path "X:\PhotosForImport\ARCHIVE" $grandChildDir.Name
+				$outputPath = Join-Path "X:\PhotosForImport\ARCHIVE" $childDir.Name
+				
+				$outputPath = Join-Path $outputPath $grandChildDir
 				
 				# Debug - output $outputPath
 				"$outputPath"
@@ -62,7 +64,9 @@ Function moveShowfileImages
 				#"$jpegsFolderPath"
 				
 				# Create Output Path
-				$outputPath = Join-Path "X:\PhotosForImport\ARCHIVE" $grandChildDir.Name
+				$outputPath = Join-Path "X:\PhotosForImport\ARCHIVE" $childDir.Name
+				
+				$outputPath = Join-Path $outputPath $grandChildDir
 				
 				# Debug - output $outputPath
 				"$outputPath"
