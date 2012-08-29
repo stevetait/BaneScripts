@@ -10,6 +10,7 @@ Function moveShowfileImages
 	#Param($filter)
 	
 	#Set working directory to showfile
+	Set-Location "\\fs01\Showfile"
 	
 	# Gets all directories below the current directory
 	$topLevelDirs = dir | Where { $_.psIsContainer -eq $true }
