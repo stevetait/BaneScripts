@@ -4,7 +4,7 @@
 #
 #######################################################################################
 
-Function moveShowfileImages
+Function copyFiles
 	{
 	
 	#Param($filter)
@@ -52,11 +52,11 @@ Function moveShowfileImages
 	}
 
 # Run script
-moveShowfileImages
+copyFiles
 
 # Attempting to handle all filetypes from within function...
-#moveShowfileImages "*.jpg"
-#moveShowfileImages "*.jpeg"
-#moveShowfileImages "*.gif"
-#moveShowfileImages "*.bmp"
-#moveShowfileImages "*.png"
+#copyFiles "*.jpg"
+#copyFiles "*.jpeg"
+#copyFiles "*.gif"
+#copyFiles "*.bmp"
+#copyFiles "*.png"

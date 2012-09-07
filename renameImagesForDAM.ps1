@@ -39,6 +39,8 @@ Function renameFiles
 					# Gets immediate parent of $file
 					$parentDirectory = Split-Path -leaf $file.DirectoryName
 					
+					$parentDirectory = $parentDirectory -replace "`'",""
+					
 					
 					# If the top level directory and immediate parent are the same, don't duplicate the prefix
 					if($showNamePrefix.Name.CompareTo($parentDirectory))
@@ -51,14 +53,16 @@ Function renameFiles
 						}
 					
 					# Replace spaces with underscores
-					$newFileName -replace " ","_"
+					$newFileName = $newFileName -replace " ","_"
+					
+					$newFileName = $newFileName -replace "`'",""
 					
 					# Trim spaces of file path
 					$imagePath = $file.fullname.ToString().Trim()
 					
-					# Add XMP Subject tag
-					exiftool "-xmp-dc:Subject=$showNamePrefix" -overwrite_original $file.FullName
-					
+					# Add XMP Subject and Copyright tags
+					exiftool "-xmp-dc:Subject=$showNamePrefix" "-xmp-dc:Rights=Copyright TAIT" -xmp-xmprights:marked=true -overwrite_original $file.FullName
+
 					# Rename $file to $newFileName
 					Rename-Item "$imagePath" "$newFileName"
 					

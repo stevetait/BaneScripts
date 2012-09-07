@@ -37,6 +37,9 @@ Function renameFolders
 			# Remove exlamation points in folder name
 			$newFolderName = $newFolderName.Replace("!","")
 			
+			# Remove single quotes in folder name
+			$newFolderName = $newFolderName.Replace("`'","")
+			
 			# Debug - output path, old name, new name
 			#Write-Host "Folder Path: $folderPath"
 			#Write-Host "Old Folder Name: $oldFolderName"
