@@ -39,6 +39,7 @@ Function renameFiles
 					# Gets immediate parent of $file
 					$parentDirectory = Split-Path -leaf $file.DirectoryName
 					
+                    $showNamePrefix = $showNamePrefix -replace "`'",""
 					$parentDirectory = $parentDirectory -replace "`'",""
 					
 					
