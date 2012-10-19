@@ -23,7 +23,7 @@ Function renameFiles
 		{
 		
 		# Set prefix to Show name - top level directory name
-		$showNamePrefix = $subDir
+		$showNamePrefix = $subDir.Name
 		
 		# Get all files that match $filter
 		$files = Get-ChildItem -Path $subDir.FullName -Filter $filter -Recurse
@@ -42,9 +42,11 @@ Function renameFiles
                     $showNamePrefix = $showNamePrefix -replace "`'",""
 					$parentDirectory = $parentDirectory -replace "`'",""
 					
+                    #"$showNamePrefix"
+                    #"$parentDirectory"
 					
 					# If the top level directory and immediate parent are the same, don't duplicate the prefix
-					if($showNamePrefix.Name.CompareTo($parentDirectory))
+					if($showNamePrefix.CompareTo($parentDirectory))
 						{
 						$newFileName = "$showNamePrefix-$parentDirectory-$file"
 						}
@@ -61,8 +63,12 @@ Function renameFiles
 					# Trim spaces of file path
 					$imagePath = $file.fullname.ToString().Trim()
 					
+                    
+                    #"$showNamePrefix - $parentDirectory"
+                    #"$newFileName"
+                    
 					# Add XMP Subject and Copyright tags
-					exiftool "-xmp-dc:Subject=$showNamePrefix" "-xmp-dc:Rights=Copyright TAIT" -xmp-xmprights:marked=true -overwrite_original $file.FullName
+					exiftool "-xmp-dc:Subject=$showNamePrefix - $parentDirectory" "-xmp-dc:Rights=Copyright TAIT" -xmp-xmprights:marked=true -overwrite_original $file.FullName
 
 					# Rename $file to $newFileName
 					Rename-Item "$imagePath" "$newFileName"
